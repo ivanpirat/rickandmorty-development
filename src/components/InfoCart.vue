@@ -1,9 +1,9 @@
-<template>
-  <div class="stop" @mousemove="cursortrek">
-    <div
+<template >
+ 
+    <div @mousemove="cursortrek" @mouseup.stop
       class="infocart"
       ref="divA"
-      @mouseup="clickInfocart"
+      @click="clickInfocart"
       :style="{
         left: xt + 'px',
         top: yt + 'px',
@@ -23,22 +23,24 @@
         <h2>Местоположение: {{ location }}</h2>
       </div>
     </div>
-  </div>
+ 
 </template>
 
 <script>
 export default {
+  functional: true,
   props: ["pers"],
   emits: ["close-window"],
   data() {
     return {
+      ww:window.innerWidth,
       mouse: false,
       name: this.pers.name,
       gender: this.pers.gender,
       species: this.pers.species,
       status: this.pers.status,
       srs: this.pers.image,
-      location : this.pers.location.name,
+      location: this.pers.location.name,
       x: 0,
       y: 0,
       xt: 0,
@@ -54,15 +56,14 @@ export default {
       this.$emit("close-window");
     },
     clickInfocart(e) {
-    
-        const x = this.xt - this.x;
-        const y = this.yt - this.y;
-        this.x = x - e.x - 15;
-        this.y = y - e.y - 15;
-        this.mouse = !this.mouse;
+      const x = this.xt - this.x;
+      const y = this.yt - this.y;
+      this.x = x - e.x - 15;
+      this.y = y - e.y - 15;
+      this.mouse = !this.mouse;
     },
     cursortrek(e) {
-      if (this.mouse && window.innerWidth > 700) {
+      if (this.mouse && this.ww > 700) {
         this.xt = e.x + this.x;
         this.yt = e.y + this.y;
       }
@@ -73,14 +74,8 @@ export default {
 
 <style scoped>
 .stop {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
-  background-color: rgba(0, 0, 0, 0.747);
+  position: absolute;
+  background-color: red;
 }
 .pers {
   display: flex;
@@ -91,38 +86,44 @@ export default {
 .persimfo {
   font-size: 12px;
   padding: 15px;
-    outline: none;
+  outline: none;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
   cursor: move;
 }
- 
+
 .infocart {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   display: flex;
   flex-direction: column;
   position: fixed;
   outline: none;
   left: 50%;
-  top:50% ;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 600px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.226) 0 0 22px;
   border-radius: 15px;
   overflow: hidden;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
 }
-h2
-{
-    font-size: 22px;
+h2 {
+  font-size: 22px;
 }
 .close {
   position: fixed;
-  left: 97%;
-  top: 2%;
+  left: 95%;
+  top: 5%;
   font-size: 22px;
   cursor: pointer;
+  padding: 5px;
   transform: translate(-50%, -50%);
 }
 img {
@@ -146,8 +147,8 @@ img {
   }
 
   .persimfo {
-    font-size: 12px;
-      padding: 0;
+    font-size: 8px;
+    padding: 0;
     align-items: center;
   }
   .infocart {
@@ -155,6 +156,9 @@ img {
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  h2 {
+  font-size: 16px;
+}
   .close {
     position: fixed;
     left: 95%;

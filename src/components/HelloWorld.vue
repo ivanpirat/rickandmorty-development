@@ -1,15 +1,18 @@
 <template>
 <div class="range_div">
-    <input
+  <h2   v-if="valueRange > 1">вы выбрали  {{valueRange-1}} 🦸🦸🦸</h2>
+  <h2  v-else >Выберите количество персонажей </h2>
+  <div class="range">
+<h2>0</h2><input
     type="range"
-    class="range"
-    name=""
-    id=""
+    class="rangeIput"
     min="1"
-    max="300"
+    max="301"
     step="1"
     v-model="valueRange"
-  />
+  /><h2>300</h2>
+  </div>
+    
 </div>
 
   <div class="collectoinCart" v-if="valueRange > 1">
@@ -73,9 +76,19 @@ export default {
 </script>
 <style   scoped>
 .range {
-  width: 90%;
+  width: 100%;
   height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   
+}
+.rangeIput{
+    width:100%;
+}
+h2{
+  color:white;
+  align-items: center;
 }
 .range_div{
 padding: 10px;

@@ -1,13 +1,15 @@
 <template>
-  <div class="cart" @click.stop="hiddenBloc=true">
+  <InfoCart
+    :pers="arrItemsApi"
+    v-if="hiddenBloc"
+    @close-window="hiddenBloc = false"
+  />
+  <div class="cart" @click.stop="hiddenBloc = true">
     <img :src="srtimg" alt="title" />
     <h3>
       Имя: <strong>{{ name }}</strong>
     </h3>
   </div>
-    <InfoCart  :pers='arrItemsApi' 
-    v-if="hiddenBloc"
-    @close-window='hiddenBloc=false'  />
 </template>
 
 <script>
@@ -20,7 +22,7 @@ export default {
     return {
       name: this.arrItemsApi.name,
       srtimg: this.arrItemsApi.image,
-      hiddenBloc:false,
+      hiddenBloc: false,
     };
   },
   props: ["arrItemsApi"],
@@ -29,8 +31,8 @@ export default {
 
 <style  scoped>
 .cart {
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-   cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   width: 200px;
